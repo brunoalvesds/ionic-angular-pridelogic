@@ -1,17 +1,135 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Profile Form
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="page-content">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <ion-list class="info-list">
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input type="text" formControlName="firstName"></ion-input>
+        <ion-icon slot="end" [hidden]="profileForm.controls['firstName'].valid" color="danger"
+          name="close-circle"></ion-icon>
+        <ion-icon slot="end" [hidden]="!profileForm.controls['firstName'].valid" color="success"
+          name="chevron-down-circle-outline"></ion-icon>
+        <ion-note
+          *ngIf="profileForm.controls['firstName'].errors?.['required'] && profileForm.controls['firstName'].touched"
+          color="danger">
+          Please enter your first name.
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input type="text" formControlName="lastName"></ion-input>
+        <ion-icon slot="end" [hidden]="profileForm.controls['lastName'].valid" color="danger"
+          name="close-circle"></ion-icon>
+        <ion-icon slot="end" [hidden]="!profileForm.controls['lastName'].valid" color="success"
+          name="chevron-down-circle-outline"></ion-icon>
+        <ion-note
+          *ngIf="profileForm.controls['lastName'].errors?.['required'] && profileForm.controls['lastName'].touched"
+          color="danger">
+          Please enter your last name.
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Date of birth</ion-label>
+        <ion-input value="{{ this.profileForm.value.dob | date: 'dd MMM yyyy' }}" id="date"></ion-input>
+        <ion-popover trigger="date">
+          <ng-template>
+            <ion-datetime formControlName="dob" presentation="date" [ngModel]="this.profileForm.value.dob"
+              locale="en-US"></ion-datetime>
+          </ng-template>
+        </ion-popover>
+        <ion-note *ngIf="profileForm.controls['dob'].errors?.['required'] && profileForm.controls['dob'].touched"
+          color="danger">
+          Please select your date of birth.
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Street Address</ion-label>
+        <ion-input type="text" formControlName="streetAddress"></ion-input>
+        <ion-icon slot="end" [hidden]="profileForm.controls['streetAddress'].valid" color="danger"
+          name="close-circle"></ion-icon>
+        <ion-icon slot="end" [hidden]="!profileForm.controls['streetAddress'].valid" color="success"
+          name="chevron-down-circle-outline"></ion-icon>
+        <ion-note
+          *ngIf="profileForm.controls['streetAddress'].errors?.['required'] && profileForm.controls['streetAddress'].touched"
+          color="danger">
+          Please enter your street address.
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">City</ion-label>
+        <ion-input type="text" formControlName="city"></ion-input>
+        <ion-icon slot="end" [hidden]="profileForm.controls['city'].valid" color="danger"
+          name="close-circle"></ion-icon>
+        <ion-icon slot="end" [hidden]="!profileForm.controls['city'].valid" color="success"
+          name="chevron-down-circle-outline"></ion-icon>
+        <ion-note *ngIf="profileForm.controls['city'].errors?.['required'] && profileForm.controls['city'].touched"
+          color="danger">
+          Please enter your city.
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">State</ion-label>
+        <ion-input type="text" formControlName="state"></ion-input>
+        <ion-icon slot="end" [hidden]="profileForm.controls['state'].valid" color="danger"
+          name="close-circle"></ion-icon>
+          <ion-icon slot="end" [hidden]="!profileForm.controls['state'].valid" color="success"
+            name="chevron-down-circle-outline"></ion-icon>
+        <ion-note *ngIf="profileForm.controls['state'].errors?.['required'] && profileForm.controls['state'].touched"
+          color="danger">
+          Please enter your state.
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Job Title</ion-label>
+        <ion-input type="text" formControlName="jobTitle"></ion-input>
+        <ion-icon slot="end" [hidden]="profileForm.controls['jobTitle'].valid" color="danger"
+          name="close-circle"></ion-icon>
+          <ion-icon slot="end" [hidden]="!profileForm.controls['jobTitle'].valid" color="success"
+            name="chevron-down-circle-outline"></ion-icon>
+        <ion-note
+          *ngIf="profileForm.controls['jobTitle'].errors?.['required'] && profileForm.controls['jobTitle'].touched"
+          color="danger">
+          Please enter your job title.
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Phone Number</ion-label>
+        <ion-input type="tel" formControlName="phoneNumber"></ion-input>
+        <ion-icon slot="end" [hidden]="profileForm.controls['phoneNumber'].valid" color="danger"
+          name="close-circle"></ion-icon>
+          <ion-icon slot="end" [hidden]="!profileForm.controls['phoneNumber'].valid" color="success"
+            name="chevron-down-circle-outline"></ion-icon>
+        <ion-note
+          *ngIf="profileForm.controls['phoneNumber'].errors?.['required'] && profileForm.controls['phoneNumber'].touched"
+          color="danger">
+          Please enter your phone number.
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Profile Photo</ion-label>
+        <ion-input type="file" accept="image/*" (change)="onFileSelected($event)"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="profilePhotoPreview">
+        <ion-avatar slot="start">
+          <img [src]="profilePhotoPreview">
+        </ion-avatar>
+        <ion-label>Profile Photo Preview</ion-label>
+      </ion-item>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+      <div class="submit-area">
+        <ion-button type="submit" [disabled]="!profileForm.valid">
+          <ion-icon name="save"></ion-icon>
+          <span>Save</span>
+        </ion-button>
+      </div>
+    </ion-list>
+
+  </form>
 </ion-content>

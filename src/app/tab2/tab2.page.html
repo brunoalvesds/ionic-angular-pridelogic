@@ -1,17 +1,37 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Profiles List
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="page-content">
+  <div *ngIf="profiles.length === 0 || !profiles || profiles === null" class="empty-list">
+    <ion-icon name="moon-outline"></ion-icon><br>
+    <span>No profiles added yet.</span>
+  </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-list class="profiles-list" *ngIf="profiles.length !== 0 || profiles || profiles !== null">
+    <mat-card *ngFor="let profile of profiles" class="profile-card">
+      <mat-card-header class="mat-card-header">
+        <img mat-card-image [src]="profile.profilePhoto || 'assets/default-avatar.png'">
+      </mat-card-header>
+      <mat-card-content class="profile-card-content">
+        <div class="profile-details">
+          <mat-card-title class="profile-name">{{ profile.firstName }} {{ profile.lastName }}</mat-card-title>
+          <div class="detail-item">
+            <div>{{ profile.jobTitle }}</div>
+          </div>
+          <div class="detail-item">
+            <div>{{ profile.street }}, {{ profile.city }}, {{ profile.state }}</div>
+          </div>
+          <div class="detail-item">
+            <div>{{ profile.phoneNumber }}</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ion-list>
+
 </ion-content>

@@ -6,7 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  profiles: any = [];
 
-  constructor() {}
-
+  constructor() {
+    let array = structuredClone(sessionStorage.getItem('profiles'));
+    if (array) {
+      this.profiles = JSON.parse(array);
+    } else {
+      this.profiles = [];
+    }
+    
+    console.log("Profiles: ", this.profiles);
+  }
 }
