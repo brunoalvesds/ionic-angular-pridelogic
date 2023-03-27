@@ -1,0 +1,7 @@
+{
+  "name": "Ionic Angular PrideLogic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
