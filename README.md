@@ -1,6 +1,6 @@
 # PrideLogic test for Bruno
 
-This project was generated with [Ionic](https://ionicframework.com/) version 5.
+This project was generated with [Ionic](https://ionicframework.com/) version 6.20.
 
 ## Development server
 
