@@ -12,6 +12,12 @@
     <span>No profiles added yet.</span>
   </div>
 
+  <span class="pull-down">Pull this content down to trigger the refresh.</span>
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list class="profiles-list" *ngIf="profiles.length !== 0 || profiles || profiles !== null">
     <mat-card *ngFor="let profile of profiles" class="profile-card">
       <mat-card-header class="mat-card-header">
@@ -21,13 +27,20 @@
         <div class="profile-details">
           <mat-card-title class="profile-name">{{ profile.firstName }} {{ profile.lastName }}</mat-card-title>
           <div class="detail-item">
-            <div>{{ profile.jobTitle }}</div>
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>{{ profile.dob | date : "MMM.dd.y" }}</span>
           </div>
           <div class="detail-item">
-            <div>{{ profile.street }}, {{ profile.city }}, {{ profile.state }}</div>
+            <ion-icon name="reader-outline"></ion-icon>
+            <span>{{ profile.jobTitle }}</span>
           </div>
           <div class="detail-item">
-            <div>{{ profile.phoneNumber }}</div>
+            <ion-icon name="map-outline"></ion-icon>
+            <span>{{ profile.streetAddress }}, {{ profile.city }}, {{ profile.state }}</span>
+          </div>
+          <div class="detail-item">
+            <ion-icon name="call-outline"></ion-icon>
+            <span>{{ profile.phoneNumber }}</span>
           </div>
         </div>
       </mat-card-content>

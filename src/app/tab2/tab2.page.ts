@@ -18,4 +18,12 @@ export class Tab2Page {
     
     console.log("Profiles: ", this.profiles);
   }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      location.reload();
+      event.target.complete();
+    }, 2000);
+  };
 }

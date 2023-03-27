@@ -10,7 +10,7 @@
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <ion-list class="info-list">
       <ion-item>
-        <ion-label position="floating">First Name</ion-label>
+        <ion-label position="floating">First Name*</ion-label>
         <ion-input type="text" formControlName="firstName"></ion-input>
         <ion-icon slot="end" [hidden]="profileForm.controls['firstName'].valid" color="danger"
           name="close-circle"></ion-icon>
@@ -23,7 +23,7 @@
         </ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Last Name</ion-label>
+        <ion-label position="floating">Last Name*</ion-label>
         <ion-input type="text" formControlName="lastName"></ion-input>
         <ion-icon slot="end" [hidden]="profileForm.controls['lastName'].valid" color="danger"
           name="close-circle"></ion-icon>
@@ -36,7 +36,7 @@
         </ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Date of birth</ion-label>
+        <ion-label position="stacked">Date of birth*</ion-label>
         <ion-input value="{{ this.profileForm.value.dob | date: 'dd MMM yyyy' }}" id="date"></ion-input>
         <ion-popover trigger="date">
           <ng-template>
@@ -50,7 +50,7 @@
         </ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Street Address</ion-label>
+        <ion-label position="floating">Street Address*</ion-label>
         <ion-input type="text" formControlName="streetAddress"></ion-input>
         <ion-icon slot="end" [hidden]="profileForm.controls['streetAddress'].valid" color="danger"
           name="close-circle"></ion-icon>
@@ -63,7 +63,7 @@
         </ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">City</ion-label>
+        <ion-label position="floating">City*</ion-label>
         <ion-input type="text" formControlName="city"></ion-input>
         <ion-icon slot="end" [hidden]="profileForm.controls['city'].valid" color="danger"
           name="close-circle"></ion-icon>
@@ -75,7 +75,7 @@
         </ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">State</ion-label>
+        <ion-label position="floating">State*</ion-label>
         <ion-input type="text" formControlName="state"></ion-input>
         <ion-icon slot="end" [hidden]="profileForm.controls['state'].valid" color="danger"
           name="close-circle"></ion-icon>
@@ -87,7 +87,7 @@
         </ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Job Title</ion-label>
+        <ion-label position="floating">Job Title*</ion-label>
         <ion-input type="text" formControlName="jobTitle"></ion-input>
         <ion-icon slot="end" [hidden]="profileForm.controls['jobTitle'].valid" color="danger"
           name="close-circle"></ion-icon>
@@ -100,7 +100,7 @@
         </ion-note>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Phone Number</ion-label>
+        <ion-label position="floating">Phone Number*</ion-label>
         <ion-input type="tel" formControlName="phoneNumber"></ion-input>
         <ion-icon slot="end" [hidden]="profileForm.controls['phoneNumber'].valid" color="danger"
           name="close-circle"></ion-icon>

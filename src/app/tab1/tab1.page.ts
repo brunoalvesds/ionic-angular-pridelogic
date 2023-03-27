@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
-import { SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -9,7 +8,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
   profileForm!: FormGroup;
   profilePhotoPreview!: SafeResourceUrl;
   dateModalOpen: boolean = false;
@@ -31,7 +30,8 @@ export class Tab1Page {
       city: ['', Validators.required],
       state: ['', Validators.required],
       jobTitle: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(10), Validators.maxLength(10)]]
+      phoneNumber: ['', [Validators.required, Validators.pattern('[0-9]*'), Validators.minLength(10), Validators.maxLength(10)]],
+      profilePhoto: ['']
     });
   }
 
@@ -41,6 +41,7 @@ export class Tab1Page {
     sessionStorage.setItem('profiles', JSON.stringify(profiles));
     this.profileForm.reset();
     this.profilePhotoPreview = '';
+    this.presentAlert();
   }
 
   onFileSelected(event: any) {
@@ -48,7 +49,9 @@ export class Tab1Page {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.profilePhotoPreview = this.sanitizer.bypassSecurityTrustResourceUrl(<string> e.target!.result);
+        const imageBase64 = <string>e.target!.result;
+        this.profilePhotoPreview = this.sanitizer.bypassSecurityTrustResourceUrl(imageBase64);
+        this.profileForm.patchValue({ profilePhoto: imageBase64 });
       };
       reader.readAsDataURL(file);
     }
@@ -56,7 +59,7 @@ export class Tab1Page {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Alert!',
+      header: 'Profile created!',
       buttons: [
         {
           text: 'Cancel',
@@ -80,5 +83,5 @@ export class Tab1Page {
     const { role } = await alert.onDidDismiss();
     this.roleMessage = `Dismissed with role: ${role}`;
   }
-    
+
 }
